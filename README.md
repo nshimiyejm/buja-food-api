@@ -20,6 +20,16 @@ In the terminal run:
     ##### `startproject` - starts a django project named `app` with the default built in configuration in the current working directory
     e.g.: docker-compose run app sh -c "django-admin.py startproject app ."
 
+2. Run the UNIT test configured in the application - `docker-compose run app sh -c "python manage.py test"`
+
+#### Create a Core application that will maintain all shared modules
+
+Run the command - `docker-compose run app sh -c "python manage.py startapp core"`
+The core application will manage: 
+- migrations 
+- database 
+    
+
 ### Continous integration 
 - Travis-CI used on the github project 
 - Automate tests and chechs when a new functionality is added and the application is pushed to GitHub
