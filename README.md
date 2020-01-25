@@ -11,3 +11,20 @@ Build the image: `docker build .`
                 database service that we run 
 
 Build the composed services: `docker-compose build`
+Use docker-compose to run commands on the image that contains the django dependencies to create the project files needed for the application 
+In the terminal run: 
+1. `docker-compose run <name_of_the_service> <command_to_run_on_the_app>`
+    ##### `sh` - shell 
+    ##### `-c` - command being passed to the docker image 
+    ##### `django-admin.py` - management command that comes with the installed version of django 
+    ##### `startproject` - starts a django project named `app` with the default built in configuration in the current working directory
+    e.g.: docker-compose run app sh -c "django-admin.py startproject app ."
+
+### Continous integration 
+- Travis-CI used on the github project 
+- Automate tests and chechs when a new functionality is added and the application is pushed to GitHub
+- Link you project to travis ci by signing up using your GitHub account on: `https://travis-ci.org/`
+    - Authorize travis to access your projects 
+    - If you don't have projects linked to travis, click on the plus button to then enable the project you wish to connect to travis 
+- Create a travis CI configuration file. This tells travis what to do every time code is pushed to the repository 
+    - Create the file in top root directory of the ptoject 

@@ -1,0 +1,22 @@
+# Tell Travis what language this project is using 
+language: python
+
+# Specify the version of python 
+python: 
+  - "3.6"
+
+# Specify to travis what services to use 
+services: 
+  # All the subservices are contained in the docker-compose file config 
+  - docker
+
+# Specify a before script that travis runs before any automation is ran 
+before_script: pip install docker-compose 
+
+# Specify the script that will be ran after the installation of docker-compose 
+# 1. Running the test 
+# 2. Running the lintting tool (flake)
+script: 
+  - docker-compose run app sh -c "python manage.py test && flake8"
+
+
