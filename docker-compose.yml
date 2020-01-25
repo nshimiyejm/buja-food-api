@@ -1,0 +1,29 @@
+# Will containe all the services that will makeup the application 
+# Specify the version of the docker compose 
+version: "3"
+
+# Specify the services that make up the application 
+services: 
+  # The compose will have a service named app 
+  app:
+    # The build section of the configuration
+    build: 
+      # The context will be . to specify the current directory that the docker-compose will be running from 
+      context: .
+    # Specify the port configuration 
+    ports: 
+      # map port 8000 from our host to port 8000 on our image 
+      - "8000:8000"
+    # Add a volume that allows the image to get the updates from the project into the docker image in real time 
+    # When a file is changed in the project, it is automatically updated in the image container without restarting docker 
+    volumes: 
+      # Mapp the app directory in the project folder to the app directory of the docker image container 
+      - ./app:/app
+
+    # Specify the command that is used to run the application in the docker container 
+    # The greater than symble is used to break the command if the application has more than one 
+    # sh: shell command 
+    # Run the Django dev server available on all ip addresses that run on the docker container on port 8000 which is mapped to the local host's port 8000 
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+
