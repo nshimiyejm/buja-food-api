@@ -131,3 +131,6 @@ dmypy.json
 # Specified Files
 app/app/_calc.py 
 app/app/_tests.py
+
+# IDEs 
+.vscode
