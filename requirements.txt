@@ -1,6 +1,7 @@
 # Install Django 
 Django>=3.0.2
 djangorestframework>=3.11.0
+psycopg2>=2.7.5,<2.8.0
 
 # Flake is used for notifications in the event the application build fails 
 flake8>=3.6.0

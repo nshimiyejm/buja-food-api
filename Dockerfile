@@ -15,8 +15,18 @@ ENV PYTHONUNBUFFERED 1
 # This line will copy the requrements from the root dir of the project to the docker image requirements file 
 COPY ./requirements.txt /requirements.txt
 
+# Install postgres db 
+# No-cache minimizes the number of exter files and packages that are included in the docker container
+# Any temp dependencies will be removed once the requirements have been installed 
+RUN apk add --update --no-cache postgresql-client
+RUN apk add --update --no-cache --virtual .tmp-build-deps \
+       gcc libc-dev linux-headers postgresql-dev
+
 # Take the copied requirements and install them to the image using pip 
 RUN pip install -r /requirements.txt
+
+# Delete all installed dependencies 
+RUN apk del .tmp-build-deps
 
 # Create a directory in the docker image where the application and source code will be stored 
 # 1. Create an empty folder named /app on the docker image 
