@@ -38,3 +38,15 @@ The core application will manage:
     - If you don't have projects linked to travis, click on the plus button to then enable the project you wish to connect to travis 
 - Create a travis CI configuration file. This tells travis what to do every time code is pushed to the repository 
     - Create the file in top root directory of the ptoject 
+
+
+#### Creating additional applications 
+When creating addional applications, use `--rm` to clean up your image 
+Remove:
+- the migration folder - managed in the core app  
+- the admin.py file - managed in the core app 
+- the tests.py - move them to a folder in called tests 
+e.g.: ` docker-compose run --rm app sh -c "python manage.py startapp user"`
+
+### Run the application by using: 
+- command: `docker-compose up` 
