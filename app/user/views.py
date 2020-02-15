@@ -1,5 +1,5 @@
 # from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics, authentication, permissions
 from rest_framework.authtoken.views import ObtainAuthToken 
 from rest_framework.settings import api_settings
 
@@ -16,4 +16,19 @@ class CreateTokenView(ObtainAuthToken):
     
     # Use the renderer to view the API posts in the browser 
     renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
+
+class ManageUserView(generics.RetrieveUpdateAPIView):
+    """Manage the authenticated user"""
+    serializer_class = UserSericalizer
+
+    # Token auth with level of permission 
+    authentication_classes = (authentication.TokenAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+
+    # Get the model for the logged in user
+    def get_object(self):
+        """Retrieve and return authenticated user"""
+        return self.request.user
+
+
 
